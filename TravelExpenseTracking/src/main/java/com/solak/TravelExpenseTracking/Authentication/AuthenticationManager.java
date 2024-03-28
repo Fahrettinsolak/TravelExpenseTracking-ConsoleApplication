@@ -10,17 +10,28 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-
-
+/**
+ * This class manages authentication for users in the Travel Expense Tracking application.
+ * It provides methods for user registration, login, and guest mode.
+ */
 public class AuthenticationManager implements AuthProvider {
-    private Map<String, String> userCredentials;
-    private Scanner scanner;
+    private Map<String, String> userCredentials; // Map to store user credentials (username, password)
+    private Scanner scanner; // Scanner object for user input
 
+    /**
+     * Constructs an AuthenticationManager object.
+     * Initializes the userCredentials map and the scanner for user input.
+     */
     public AuthenticationManager() {
         userCredentials = new HashMap<>();
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * Creates a text file to store user credentials.
+     * @param username The username of the user
+     * @param password The password of the user
+     */
     private void createTextFile(String username, String password) {
         String directoryPath = "Users/" + username;
         String filePath = directoryPath + "/" + username + ".txt";
@@ -45,6 +56,12 @@ public class AuthenticationManager implements AuthProvider {
         }
     }
 
+    /**
+     * Validates user credentials for login.
+     * @param username The username entered by the user
+     * @param password The password entered by the user
+     * @return True if login is successful, otherwise False
+     */
     @Override
     public boolean login(String username, String password) {
         String filePath = "Users/" + username + "/" + username + ".txt";
@@ -68,11 +85,17 @@ public class AuthenticationManager implements AuthProvider {
         return false;
     }
 
+    /**
+     * Registers a new user.
+     * @param username The username chosen by the user
+     * @param password The password chosen by the user
+     * @return True if registration is successful, otherwise False
+     */
     @Override
     public boolean register(String username, String password) {
         if (!userCredentials.containsKey(username)) {
             userCredentials.put(username, password);
-            createTextFile(username, password); // Kullanıcı kaydedildiğinde metin dosyasını oluştur
+            createTextFile(username, password); // Create text file when user is registered
             System.out.println("Registration successful.");
             return true;
         }
@@ -80,11 +103,18 @@ public class AuthenticationManager implements AuthProvider {
         return false;
     }
 
+    /**
+     * Activates guest mode.
+     */
     @Override
     public void guestMode() {
         System.out.println("Guest mode activated.");
     }
 
+    /**
+     * Starts the authentication process.
+     * Displays options for registration, login, guest mode, and exit.
+     */
     public void startAuthentication() {
         System.out.println("Welcome to Travel Expense Tracking App!");
 
@@ -104,7 +134,7 @@ public class AuthenticationManager implements AuthProvider {
                     break;
                 case 3:
                     guestMode();
-                    isLoggedIn = true; // Misafir moduna geçildiğinde oturumu kapat
+                    isLoggedIn = true; // Log out when entering guest mode
                     break;
                 case 4:
                     System.out.println("Exiting...");
@@ -115,9 +145,12 @@ public class AuthenticationManager implements AuthProvider {
             }
         }
 
-        // Authenticated kullanıcı ile devam et...
+        // Continue with authenticated user...
     }
 
+    /**
+     * Performs user registration.
+     */
     private void performRegistration() {
         System.out.println("\nRegistration:");
         System.out.print("Enter username: ");
@@ -127,6 +160,10 @@ public class AuthenticationManager implements AuthProvider {
         register(username, password);
     }
 
+    /**
+     * Performs user login.
+     * @return True if login is successful, otherwise False
+     */
     private boolean performLogin() {
         System.out.println("\nLogin:");
         System.out.print("Enter username: ");

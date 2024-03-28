@@ -1,39 +1,48 @@
 package com.solak.TravelExpenseTracking.Budget;
 
+/**
+ * This class generates budget proposals based on specific travel type and destination.
+ */
 public class BudgetProposalGenerator {
 
-    // Belirli bir seyahat türü ve hedefine göre bütçe önerisi oluşturma yöntemi
+    /**
+     * Method to create a budget proposal based on a given trip type and destination.
+     * 
+     * @param tripType     The type of the trip (e.g., "city", "beach").
+     * @param destination  The destination of the trip (e.g., "Europe", "Asia").
+     * @return             A Budget object representing the proposed budget.
+     */
     public Budget createBudgetProposal(String tripType, String destination) {
-        // Ortalama harcama değerleri
+        // Average expenditure values
         double averageAccommodationCost;
         double averageTransportationCost;
         double averageFoodCost;
 
-        // Seyahat türüne göre ortalama konaklama maliyeti belirleme
+        // Determining average accommodation cost based on trip type
         if (tripType.equalsIgnoreCase("city")) {
-            averageAccommodationCost = 100; // Şehir içi seyahatler için ortalama konaklama maliyeti
+            averageAccommodationCost = 100; // Average accommodation cost for city trips
         } else if (tripType.equalsIgnoreCase("beach")) {
-            averageAccommodationCost = 150; // Plaj tatilleri için ortalama konaklama maliyeti
+            averageAccommodationCost = 150; // Average accommodation cost for beach vacations
         } else {
-            averageAccommodationCost = 120; // Varsayılan değer
+            averageAccommodationCost = 120; // Default value
         }
 
-        // Hedefe göre ortalama ulaşım maliyeti belirleme
+        // Determining average transportation cost based on destination
         if (destination.equalsIgnoreCase("Europe")) {
-            averageTransportationCost = 200; // Avrupa seyahatleri için ortalama ulaşım maliyeti
+            averageTransportationCost = 200; // Average transportation cost for European trips
         } else if (destination.equalsIgnoreCase("Asia")) {
-            averageTransportationCost = 250; // Asya seyahatleri için ortalama ulaşım maliyeti
+            averageTransportationCost = 250; // Average transportation cost for Asian trips
         } else {
-            averageTransportationCost = 220; // Varsayılan değer
+            averageTransportationCost = 220; // Default value
         }
 
-        // Ortalama yemek maliyeti
-        averageFoodCost = 30; // Bir öğün yemeğin ortalama maliyeti
+        // Average food cost
+        averageFoodCost = 30; // Average cost of one meal
 
-        // Toplam ortalama harcama hesaplama
+        // Calculating total average expenditure
         double totalAverageCost = averageAccommodationCost + averageTransportationCost + averageFoodCost;
 
-        // Bütçe önerisi oluşturma
+        // Creating a budget proposal
         Budget budgetProposal = new Budget(totalAverageCost, "USD", "Average expenses based on trip type and destination", "Per Person", "Total");
 
         return budgetProposal;

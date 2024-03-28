@@ -9,23 +9,44 @@ import java.util.Scanner;
 
 import com.solak.TravelExpenseTracking.Authentication.User;
 
+/**
+ * Manages budgets including creation, modification, deletion, and persistence to file.
+ */
 public class BudgetManager implements BudgetProvider {
-	
+    
+    /** Holds budgets mapped by category. */
     public Map<String, Budget> budgets;
+    
+    /** The user associated with this budget manager. */
     private User user;
+    
+    /**
+     * Constructs a BudgetManager object.
+     * @param user The user associated with this budget manager.
+     */
     public BudgetManager(User user) {
         budgets = new HashMap<>();
         this.user = user;
     }
     
+    /**
+     * Gets the budget for the specified category.
+     * @param category The category of the budget.
+     * @return The budget associated with the category.
+     */
     public Budget getBudget(String category) {
         return budgets.get(category);
     }
+    
     @Override
     public void setBudget(Budget budget) {
         budgets.put(budget.getCategory(), budget);
         System.out.println("Budget set for category: " + budget.getCategory());
     }
+    
+    /**
+     * Constructs a BudgetManager object without a user.
+     */
     public BudgetManager() {
         budgets = new HashMap<>();
     }
@@ -78,43 +99,50 @@ public class BudgetManager implements BudgetProvider {
         String currency = scanner.next();
 
         System.out.print("Enter a description for your budget: ");
-        scanner.nextLine(); // Yeni satır karakterini tüket
+        scanner.nextLine(); // Consume newline character
         String description = scanner.nextLine();
 
         String defaultType = "Total"; 
         String defaultCategory = "General";
 
-        // Kullanıcının girdiği bilgilerle bütçe aralığı oluşturma
+        // Create a budget range using the user input
         String budgetRangeDescription = "Budget range from " + minBudgetAmount + " to " + maxBudgetAmount + " " + currency;
-
-        // BudgetRange sınıfını kullanarak bütçe aralığı oluşturma
+        
+        // Use BudgetRange class to create the budget range
         return new BudgetRange(minBudgetAmount, maxBudgetAmount, currency, description, defaultType, defaultCategory);
     }
 
     @Override
     public Budget createBudgetProposal(String tripType, String destination) {
-        // Belirli bir seyahat türü ve hedefine göre bütçe önerisi oluşturmak için BudgetProposalGenerator sınıfını kullanma
+        // Use BudgetProposalGenerator class to create a budget proposal based on a specific trip type and destination
         BudgetProposalGenerator proposalGenerator = new BudgetProposalGenerator();
         return proposalGenerator.createBudgetProposal(tripType, destination);
     }
+    
     @Override
     public void setBudget(Budget budget, String username) {
         budgets.put(budget.getCategory(), budget);
         System.out.println("Budget set for category: " + budget.getCategory());
         
-        // Budget'i dosyaya kaydet
+        // Save the budget to a file
         saveBudgetToFile(budget, username);
     }
+    
+    /**
+     * Saves a budget to a file.
+     * @param budget The budget to be saved.
+     * @param username The username associated with the budget.
+     */
     private void saveBudgetToFile(Budget budget, String username) {
         try {
-            // Dosya yolunu oluştur
+            // Construct the file path
             String filePath = "C:/Users/" + username + "/" + username + "-budget.txt";
             
-            // Dosyayı oluştur
+            // Create the file
             File file = new File(filePath);
-            file.getParentFile().mkdirs(); // Gerekirse dizini oluştur
+            file.getParentFile().mkdirs(); // Create directories if necessary
             
-            // Dosyaya yaz
+            // Write to the file
             FileWriter writer = new FileWriter(file);
             writer.write(budget.toString());
             writer.close();
@@ -125,12 +153,13 @@ public class BudgetManager implements BudgetProvider {
     }
     
     
+    /**
+     * Gets the username from user input.
+     * @return The username entered by the user.
+     */
     private String getUsernameFromInput() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter your username: ");
         return scanner.nextLine();
     }
-
-
-    
 }

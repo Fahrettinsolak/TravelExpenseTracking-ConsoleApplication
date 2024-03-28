@@ -1,5 +1,11 @@
+/**
+ * @file ConsoleUI.java
+ * @brief Contains the implementation of the ConsoleUI class which handles the user interface in a console-based application for travel expense tracking.
+ */
+
 package com.solak.TravelExpenseTracking.Main;
 
+//Import necessary packages
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -19,6 +25,10 @@ import com.solak.TravelExpenseTracking.Report.ReportManager;
 import com.solak.TravelExpenseTracking.Trip.Trip;
 import com.solak.TravelExpenseTracking.Trip.TripManager;
 
+/**
+ * @brief Represents the console-based user interface for the travel expense tracking application.
+ */
+
 public class ConsoleUI {
     private Scanner scanner;
     private AuthenticationManager authenticationManager;
@@ -28,6 +38,11 @@ public class ConsoleUI {
     private ReportManager reportManager;
     private User user;
 
+    /**
+     * @brief Constructor for ConsoleUI class.
+     * @param user The user object.
+     */
+    
     public ConsoleUI(User user) {
         this.user = user;
         this.budgetManager = new BudgetManager(user);
@@ -38,6 +53,10 @@ public class ConsoleUI {
         this.reportManager = new ReportManager();
     }
 
+    /**
+     * @brief Starts the console application.
+     */
+    
     public void start() {
         String username = null;
         while (true) {
@@ -70,6 +89,11 @@ public class ConsoleUI {
         }
     }
 
+    /**
+     * @brief Authenticates a user.
+     * @return The username if authentication is successful, null otherwise.
+     */
+    
     String authenticateUser() {
         System.out.println("Enter username:");
         String username = scanner.next();
@@ -88,7 +112,11 @@ public class ConsoleUI {
             return null;
         }
     }
-
+    
+    /**
+     * @brief Registers a new user.
+     */
+    
     private void registerUser() {
         System.out.println("Enter new username:");
         String username = scanner.next();
@@ -101,6 +129,11 @@ public class ConsoleUI {
             System.out.println("Registration failed. Username already exists.");
         }
     }
+    
+    /**
+     * @brief Displays the options menu based on user's role.
+     * @param username The username of the logged-in user.
+     */
 
     private void showOptionsMenu(String username) {
         while (true) {
@@ -140,9 +173,10 @@ public class ConsoleUI {
         }
     }
     
-    
-    
-    
+    /**
+     * @brief Plans a trip.
+     * @param username The username of the logged-in user.
+     */
 
     private void planTrip(String username) {
         System.out.println("Plan Trip Menu:");
@@ -174,6 +208,12 @@ public class ConsoleUI {
                 System.out.println("Invalid choice. Please enter a valid option.");
         }
     }
+
+    /**
+     * @brief Views trips for a user.
+     * @param username The username of the logged-in user.
+     */
+    
     private void viewTrips(String username) {
         List<Trip> userTrips = tripManager.viewTrips(username);
         if (userTrips.isEmpty()) {
@@ -185,7 +225,12 @@ public class ConsoleUI {
             }
         }
     }
-
+    
+    /**
+     * @brief Creates a new trip.
+     * @param username The username of the logged-in user.
+     */
+    
     private void createTrip(String username) {
         System.out.println("Enter destination:");
         String destination = scanner.next();
@@ -218,6 +263,12 @@ public class ConsoleUI {
         // Add trip to TripManager
         tripManager.createTrip(username, trip);
     }
+    
+    /**
+     * @brief Edits an existing trip.
+     * @param username The username of the logged-in user.
+     */
+    
     private void editTrip(String username) {
         System.out.println("Enter trip ID to edit:");
         String tripId = scanner.next();
@@ -263,20 +314,33 @@ public class ConsoleUI {
         // Update trip in TripManager
         tripManager.editTrip(username, trip);
     }
+    
+    /**
+     * @brief Deletes an existing trip.
+     * @param username The username of the logged-in user.
+     */
+    
     private void deleteTrip(String username) {
         System.out.println("Enter trip ID to delete:");
         String tripId = scanner.next();
         tripManager.deleteTrip(username, tripId);
     }
+    
+    /**
+     * @brief Generates a unique trip ID.
+     * @return A unique trip ID as a string.
+     */
+    
     private String generateTripId() {
         // Logic to generate a unique trip ID
         return UUID.randomUUID().toString();
     }
     
-    
-    
-    
-    
+    /**
+     * @brief Parses a date string into a Date object.
+     * @param dateStr The date string to parse.
+     * @return The parsed Date object.
+     */
     
     public static Date parseDate(String dateStr) {
         try {
@@ -287,7 +351,10 @@ public class ConsoleUI {
             return null;
         }
     }
-
+    
+    /**
+     * @brief Displays the expense menu and handles user's choice.
+     */
 
     private void recordExpenseMenu() {
         System.out.println("Expense Menu:");
@@ -319,7 +386,10 @@ public class ConsoleUI {
         }
     }
     
-
+    /**
+     * @brief Records a new expense.
+     */
+    
     private void recordExpense() {
         System.out.println("Enter expense details:");
 
@@ -344,11 +414,20 @@ public class ConsoleUI {
         // Log the expense
         expenseManager.logExpense(expense);
     }
-
+    
+    /**
+     * @brief Views all recorded expenses.
+     */
+    
     private void viewExpenses() {
         System.out.println("Available expenses:");
         expenseManager.viewExpenses();
     }
+    
+    /**
+     * @brief Edits an existing expense.
+     */
+    
     private void editExpense() {
         System.out.println("Enter the ID of the expense to edit:");
         UUID expenseId;
@@ -391,6 +470,11 @@ public class ConsoleUI {
         // Edit the expense
         expenseManager.editExpense(expense);
     }
+    
+    /**
+     * @brief Deletes an existing expense.
+     */
+    
     private void deleteExpense() {
         System.out.println("Enter the ID of the expense to delete:");
         UUID expenseId;
@@ -409,7 +493,10 @@ public class ConsoleUI {
     
     //Manage Budget
 
-    
+    /**
+     * @brief Displays the budget menu and handles user's choice.
+     * @param user The user object.
+     */
     
     private void manageBudget(User user) {
         while (true) {
@@ -441,7 +528,11 @@ public class ConsoleUI {
             }
         }
     }
-
+    
+    /**
+     * @brief Displays the budget menu options.
+     */
+    
     private void displayBudgetMenu() {
         System.out.println("Budget Menu:");
         System.out.println("1. Set Budget");
@@ -453,6 +544,12 @@ public class ConsoleUI {
         System.out.println("7. Go Back");
 
     }
+    
+    /**
+     * @brief Creates a new budget for the user.
+     * @param user The user object.
+     */
+    
     private void createBudget(User user) {
         System.out.println("Enter category:");
         String category = scanner.next();
@@ -462,10 +559,19 @@ public class ConsoleUI {
         String username = user.getUsername(); // Kullanıcı adını al
         budgetManager.setBudget(budget, username);
     }
+    
+    /**
+     * @brief Views all budgets set by the user.
+     */
+    
     private void viewBudgets() {
         budgetManager.viewBudget();
     }
-
+    
+    /**
+     * @brief Edits an existing budget category.
+     */
+    
     private void editBudget() {
         System.out.println("Enter category to edit:");
         String category = scanner.next();
@@ -482,13 +588,22 @@ public class ConsoleUI {
             System.out.println("Budget not found for category: " + category);
         }
     }
-
+    
+    /**
+     * @brief Deletes an existing budget category.
+     */
+    
     private void deleteBudget() {
         System.out.println("Enter category to delete:");
         String category = scanner.next();
         budgetManager.deleteBudget(category);
     }
-
+    
+    /**
+     * @brief Creates a budget range for a specific category.
+     * @param user The user object.
+     */
+    
     private void createBudgetRange(User user) {
         System.out.println("Creating a Budget Range:");
 
@@ -514,7 +629,12 @@ public class ConsoleUI {
         String username = user.getUsername(); // Kullanıcı adını al
         budgetManager.setBudget(budgetRange, username);
     }
-
+    
+    /**
+     * @brief Creates a budget proposal based on trip type and destination.
+     * @param user The user object.
+     */
+    
     private void createBudgetProposal(User user) {
         System.out.println("Creating a Budget Proposal:");
 
@@ -534,10 +654,18 @@ public class ConsoleUI {
     
    // generateReport
     
+    /**
+     * @brief Displays the report generation menu and handles user's choice.
+     */
+    
     private int getUserChoice() {
         System.out.print("Enter your choice: ");
         return scanner.nextInt();
     }
+    
+    /**
+     * @brief Generates a report for trip expenses.
+     */
     
     private void generateReport() {
         System.out.println("Report Generation Menu:");
@@ -559,15 +687,27 @@ public class ConsoleUI {
                 System.out.println("Invalid choice. Please enter a valid option.");
         }
     }
-
+    
+    /**
+     * @brief Generates a report for trip expenses.
+     */
+    
     private void generateTripExpensesReport() {
-        // Belirli bir seyahat için harcanan toplam miktarı raporlayacak kodu buraya ekleyin
+    	 // Add code here to generate a report for total expenses of a specific trip
     }
-
+    
+    /**
+     * @brief Generates a summary report for the user's budget.
+     */
+    
     private void generateBudgetSummaryReport() {
-        // Belirli bir bütçe kategorisindeki toplam harcamaları raporlayacak kodu buraya ekleyin
+    	 // Add code here to generate a summary report for the user's budget
     }
-
+    
+    /**
+     * @brief Displays the report types menu and handles user's choice.
+     */
+    
     private void viewReports() {
         System.out.println("Report Types:");
         System.out.println("1. Trip Expenses Report");
@@ -588,17 +728,30 @@ public class ConsoleUI {
                 System.out.println("Invalid choice. Please enter a valid option.");
         }
     }
-
+    
+    /**
+     * @brief Views the trip expenses report for a specific trip.
+     */
+    
     private void viewTripExpensesReport() {
         System.out.println("Enter trip ID:");
         String tripId = scanner.next();
         reportManager.showTripExpensesReport(tripId);
     }
-
+    
+    /**
+     * @brief Views the budget summary report.
+     */
+    
     private void viewBudgetSummaryReport() {
         
     }
     public void setAuthenticationManager(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
+    /**
+     * @brief Gets the user's choice from the console input.
+     * @return The integer representing the user's choice.
+     */
+    
 }
