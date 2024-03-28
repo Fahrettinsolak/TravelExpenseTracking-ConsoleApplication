@@ -5,23 +5,23 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<!-- The Basics -->
-	<groupId>com.ucoruh.calculator</groupId>
-	<artifactId>calculator-app</artifactId>
+	<groupId>com.solak.TravelExpenseTracking</groupId>
+	<artifactId>TravelExpenseTracking</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<!-- More Project Information -->
-	<name>calculator-app</name>
-	<url>https://github.com/ucoruh/eclipse-java-maven-template</url>
+	<name>TravelExpenseTracking</name>
+	<url>https://github.com/Fahrettinsolak/ce205-midterm-fahrettin-solak-java</url>
 	<scm>
-		<url>https://github.com/ucoruh/eclipse-java-maven-template</url>
+		<url>https://github.com/Fahrettinsolak/ce205-midterm-fahrettin-solak-java</url>
 	</scm>
-	<inceptionYear>2023</inceptionYear>
+	<inceptionYear>2024</inceptionYear>
 	<developers>
 		<developer>
-			<name>Asst. Prof. Dr. Ugur CORUH</name>
+			<name>Fahrettin Solak</name>
 			<organization>RTEU</organization>
-			<email>ugur.coruh@erdogan.edu.tr</email>
+			<email>fahrettin_solak20@erdogan.edu.tr</email>
 			<roles>
 				<role>Developer</role>
 				<role>Designer</role>
@@ -38,8 +38,8 @@
 	</developers>
 	<contributors>
 		<contributor>
-			<name>Asst. Prof. Dr. Ugur CORUH</name>
-			<email>ugur.coruh@erdogan.edu.tr</email>
+			<name>Fahrettin Solak</name>
+			<email>fahrettin_solak20@erdogan.edu.tr</email>
 			<organization>RTEU</organization>
 			<roles>
 				<role>Developer</role>
@@ -55,7 +55,7 @@
 			</roles>
 		</contributor>
 	</contributors>
-	<description>Maven Example Template Project</description>
+	<description>ce205-midterm-fahrettin-solak-java</description>
 	<organization>
 		<name>Recep Tayyip Erdogan University</name>
 		<url>www.erdogan.edu.tr</url>
@@ -63,38 +63,38 @@
 	<!-- Environment Settings -->
 	<issueManagement>
 		<system>Github</system>
-		<url>https://github.com/ucoruh/eclipse-java-maven-template</url>
+		<url>https://github.com/Fahrettinsolak/ce205-midterm-fahrettin-solak-java</url>
 	</issueManagement>
 	<ciManagement>
 		<system>Github</system>
 		<notifiers>
 			<notifier>
-				<address>ugur.coruh@erdogan.edu.tr</address>
+				<address>fahrettin_solak20@erdogan.edu.tr</address>
 				<sendOnSuccess>true</sendOnSuccess>
 				<sendOnError>true</sendOnError>
 				<sendOnFailure>true</sendOnFailure>
 				<sendOnWarning>true</sendOnWarning>
 			</notifier>
 		</notifiers>
-		<url>https://github.com/ucoruh/eclipse-java-maven-template</url>
+		<url>https://github.com/Fahrettinsolak/ce205-midterm-fahrettin-solak-java</url>
 	</ciManagement>
 	<repositories>
 		<repository>
-			<id>eclipse-java-maven-template</id>
-			<name>eclipse-java-maven-template</name>
-			<url>https://github.com/ucoruh/eclipse-java-maven-template</url>
+			<id>ce205-midterm-fahrettin-solak-java</id>
+			<name>ce205-midterm-fahrettin-solak-java</name>
+			<url>https://github.com/Fahrettinsolak/ce205-midterm-fahrettin-solak-java</url>
 		</repository>
 	</repositories>
 	<distributionManagement>
 		<site>
-			<name>https://github.com/ucoruh/eclipse-java-maven-template</name>
-			<id>eclipse-java-maven-template</id>
+			<name>https://github.com/Fahrettinsolak/ce205-midterm-fahrettin-solak-java</name>
+			<id>ce205-midterm-fahrettin-solak-java</id>
 		</site>
-		<downloadUrl>https://github.com/ucoruh/eclipse-java-maven-template</downloadUrl>
+		<downloadUrl>https://github.com/Fahrettinsolak/ce205-midterm-fahrettin-solak-java</downloadUrl>
 		<repository>
-			<id>eclipse-java-maven-template</id>
-			<name>eclipse-java-maven-template</name>
-			<url>https://github.com/ucoruh/eclipse-java-maven-template</url>
+			<id>ce205-midterm-fahrettin-solak-java</id>
+			<name>ce205-midterm-fahrettin-solak-java</name>
+			<url>https://github.com/Fahrettinsolak/ce205-midterm-fahrettin-solak-java</url>
 		</repository>
 	</distributionManagement>
 	<properties>
@@ -128,6 +128,12 @@
 			<artifactId>logback-classic</artifactId>
 			<version>1.2.6</version>
 		</dependency>
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi</artifactId>
+		    <version>5.2.5</version> <!-- Kullanmak istediğiniz Apache POI sürümünü buraya ekleyin -->
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -145,8 +151,24 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
 					<includes>
-						<include>**/CalculatorAppTest.java</include>
-						<include>**/CalculatorTest.java</include>
+						<include>**/Authentication/AuthenticationManager.Java</include>
+						<include>**/Authentication/AuthProvider.Java</include>
+						<include>**/Authentication/User.Java</include>
+						<include>**/Budget/BudgetManager.java</include>
+						<include>**/Budget/BudgetProposalGenerator.java</include>
+						<include>**/Budget/BudgetProvider.java</include>
+						<include>**/Budget/Budget.java</include>
+						<include>**/Expense/Expense.java</include>
+						<include>**/Expense/ExpenseManager.java</include>
+						<include>**/Expense/ExpenseProvider.java</include>
+						<include>**/Report/Report.java</include>
+						<include>**/Report/ReportManager.java</include>
+						<include>**/Report/ReportProvider.java</include>
+						<include>**/Trip/Trip.java</include>
+						<include>**/Trip/TripManager.java</include>
+						<include>**/Trip/TripProvider.java</include>
+						<include>**/Main/ConsoleUI.java</include>
+						<include>**/Main/Main.java</include>
 					</includes>
 				</configuration>
 			</plugin>
@@ -250,7 +272,7 @@
 								<transformer
 									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
 									<mainClass>
-										com.ucoruh.calculator.CalculatorApp</mainClass>
+										com.solak.TravelExpenseTracking.Main</mainClass>
 								</transformer>
 							</transformers>
 						</configuration>
